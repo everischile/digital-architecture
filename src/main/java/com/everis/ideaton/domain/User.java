@@ -1,11 +1,9 @@
 package com.everis.ideaton.domain;
 
 public class User {
+
     private String firstName;
     private String lastName;
-
-    public User() {
-    }
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;
@@ -26,13 +24,5 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
     }
 }
