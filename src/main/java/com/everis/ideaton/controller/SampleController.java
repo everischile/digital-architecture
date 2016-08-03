@@ -1,6 +1,5 @@
 package com.everis.ideaton.controller;
 
-import com.everis.ideaton.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +21,8 @@ public class SampleController {
 
     @RequestMapping(value = "/mongo", method = RequestMethod.GET)
     public String getMongoDat() {
-        User user = new User("rafael","carrasco");
-        mongoTemplate.insert(user, "user");
+        //User user = new User("rafael","carrasco");
+        //mongoTemplate.insert(user, "user");
         return mongoTemplate.getCollection("user").findOne().toString();
     }
 
