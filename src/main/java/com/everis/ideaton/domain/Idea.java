@@ -1,8 +1,14 @@
 package com.everis.ideaton.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.List;
 
+@Document
 public final class Idea {
+
+    @Id
     private final Long id;
     private final String title;
     private final String description;
@@ -12,6 +18,18 @@ public final class Idea {
     private final Video video;
     private final List<Image> images;
     private final List<Like> likes;
+
+    public Idea() {
+        id = null;
+        title = null;
+        description = null;
+        category = null;
+        uploadedBy = null;
+        members = null;
+        video = null;
+        images = null;
+        likes = null;
+    }
 
     private Idea(Long id, String title, String description, Category category, User uploadedBy, List<User> members,
                  Video video, List<Image> images, List<Like> likes) {

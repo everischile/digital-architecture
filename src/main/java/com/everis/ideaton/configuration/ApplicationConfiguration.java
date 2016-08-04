@@ -2,10 +2,10 @@ package com.everis.ideaton.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
+import com.mangofactory.swagger.plugin.EnableSwagger;
+import org.springframework.context.annotation.*;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
@@ -13,7 +13,13 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.xml.transform.Source;
@@ -21,11 +27,21 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
+@EnableSwagger
 @Import({ MongoConfiguration.class })
-@ComponentScan(basePackages = { "com.everis.ideaton.controller" })
+/*@ComponentScan({ "com.everis.ideaton.controller", "com.everis.ideaton.repository",
+"com.everis.ideaton.service"})*/
+
+@ComponentScan(
+        basePackages = { "com.everis.ideaton" },
+        useDefaultFilters = false,
+        includeFilters = { @ComponentScan.Filter(
+                type = FilterType.ANNOTATION,
+                value = { Configuration.class, Controller.class,
+                        Component.class, Service.class, Repository.class }) })
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
-/*    @Override
+    @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         configurer.favorPathExtension(false).
                 favorParameter(true).
@@ -35,7 +51,7 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
                 defaultContentType(MediaType.APPLICATION_JSON).
                 mediaType("xml", MediaType.APPLICATION_XML).
                 mediaType("json", MediaType.APPLICATION_JSON);
-    }*/
+    }
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -61,5 +77,17 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         return objectMapper;
+    }
+
+    //SwaggerUi
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/swagger-ui/**").addResourceLocations("classpath:/META-INF/resources/webjars/swagger-ui/2.1.3/");
+    }
+
+    //SwaggerUi
+    @Bean
+    public SpringSwaggerConfig getSpringSwaggerConfig() {
+        return new SpringSwaggerConfig();
     }
 }

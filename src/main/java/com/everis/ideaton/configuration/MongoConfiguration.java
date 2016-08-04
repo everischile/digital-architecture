@@ -9,10 +9,13 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
 @PropertySource(value= {"classpath:enviroment.properties"})
-public class MongoConfiguration {
+@EnableMongoRepositories(mongoTemplateRef = "getMongoTemplate", basePackages = "com.everis.ideaton.repository")
+public class MongoConfiguration //extends AbstractMongoConfiguration
+{
 
     @Value("${mongo.url}")
     private String url;
@@ -39,4 +42,5 @@ public class MongoConfiguration {
         MongoTemplate mongoTemplate = new MongoTemplate(getMongoDbFactory());
         return mongoTemplate;
     }
+
 }
