@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @Configuration
 @PropertySource(value= {"classpath:enviroment.properties"})
 @EnableMongoRepositories(mongoTemplateRef = "getMongoTemplate", basePackages = "com.everis.ideaton.repository")
-public class MongoConfiguration //extends AbstractMongoConfiguration
+public class MongoConfiguration
 {
 
     @Value("${mongo.url}")
@@ -33,7 +33,6 @@ public class MongoConfiguration //extends AbstractMongoConfiguration
 
     public
     @Bean MongoDbFactory getMongoDbFactory() throws Exception {
-        System.out.println(url);
         return new SimpleMongoDbFactory(new MongoClient(url,port), dbname);
     }
 

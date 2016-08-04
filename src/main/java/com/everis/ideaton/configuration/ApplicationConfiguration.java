@@ -2,8 +2,6 @@ package com.everis.ideaton.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
-import com.mangofactory.swagger.plugin.EnableSwagger;
 import org.springframework.context.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
@@ -27,8 +25,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
-@EnableSwagger
-@Import({ MongoConfiguration.class })
+@Import({ MongoConfiguration.class, SwaggerConfiguration.class })
 /*@ComponentScan({ "com.everis.ideaton.controller", "com.everis.ideaton.repository",
 "com.everis.ideaton.service"})*/
 
@@ -79,15 +76,12 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
         return objectMapper;
     }
 
-    //SwaggerUi
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/swagger-ui/**").addResourceLocations("classpath:/META-INF/resources/webjars/swagger-ui/2.1.3/");
-    }
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
 
-    //SwaggerUi
-    @Bean
-    public SpringSwaggerConfig getSpringSwaggerConfig() {
-        return new SpringSwaggerConfig();
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }
