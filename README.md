@@ -13,3 +13,7 @@ For runing the project:
 
 * Gradle build
 * Deploy the .war file that is in \build\libs some web container like Tomcat or use any embedded container like Jetty.
+
+See the documentation and test the API
+
+* http://localhost:8080/swagger-ui.html
