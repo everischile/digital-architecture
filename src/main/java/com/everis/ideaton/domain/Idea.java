@@ -3,13 +3,14 @@ package com.everis.ideaton.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Document
 public final class Idea {
 
     @Id
-    private final Long id;
+    private final BigInteger id;
     private final String title;
     private final String description;
     private final Category category;
@@ -31,7 +32,7 @@ public final class Idea {
         likes = null;
     }
 
-    private Idea(Long id, String title, String description, Category category, User uploadedBy, List<User> members,
+    private Idea(BigInteger id, String title, String description, Category category, User uploadedBy, List<User> members,
                  Video video, List<Image> images, List<Like> likes) {
         this.id = id;
         this.title = title;
@@ -44,13 +45,13 @@ public final class Idea {
         this.likes = likes;
     }
 
-    public static Idea createIdeaInstance(Long id, String title, String description, Category category,
+    public static Idea createIdeaInstance(BigInteger id, String title, String description, Category category,
                                           User uploadedBy, List<User> members, Video video, List<Image> images,
                                           List<Like> likes){
         return new Idea(id, title, description, category, uploadedBy, members, video, images, likes);
     }
 
-    public Long getId() {
+    public BigInteger getId() {
         return id;
     }
 

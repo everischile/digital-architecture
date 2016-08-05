@@ -3,11 +3,13 @@ package com.everis.ideaton.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigInteger;
+
 @Document
 public final class Image {
 
     @Id
-    private final Long id;
+    private final BigInteger id;
     private final String link;
 
     public Image() {
@@ -15,12 +17,20 @@ public final class Image {
         link = null;
     }
 
-    private Image(Long id, String link) {
+    private Image(BigInteger id, String link) {
         this.id = id;
         this.link = link;
     }
 
-    public static Image createImageInstance(Long id, String link){
+    public static Image createImageInstance(BigInteger id, String link){
         return new Image(id, link);
+    }
+
+    public BigInteger getId() {
+        return id;
+    }
+
+    public String getLink() {
+        return link;
     }
 }

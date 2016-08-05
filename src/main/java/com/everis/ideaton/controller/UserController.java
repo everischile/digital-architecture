@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequestMapping("/user")
 @RestController
-@Api(value = "ideaton-api", description = "user api")
+@Api(value = "user", description = "user operations")
 public class UserController {
 
     @Autowired
@@ -39,14 +39,14 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @ApiOperation("Deletes a User")
+    @ApiOperation("Updates a User")
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public User updateUser(@RequestBody User user, HttpServletResponse response) throws RuntimeException {
         return userService.updateUser(user);
     }
 
-    @ApiOperation("Updates an existing User")
+    @ApiOperation("Deletes an existing User")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable("id") BigInteger id) throws RuntimeException {
         userService.deleteUser(id);
