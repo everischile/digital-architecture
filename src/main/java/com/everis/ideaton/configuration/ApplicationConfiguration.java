@@ -25,7 +25,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
-@Import({ MongoConfiguration.class, SwaggerConfiguration.class })
+@Import({SwaggerConfiguration.class, MongoConfiguration.class })
 /*@ComponentScan({ "com.everis.ideaton.controller", "com.everis.ideaton.repository",
 "com.everis.ideaton.service"})*/
 

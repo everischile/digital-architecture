@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
+//@Profile("local")
 @PropertySource(value= {"classpath:enviroment.properties"})
 @EnableMongoRepositories(mongoTemplateRef = "getMongoTemplate", basePackages = "com.everis.ideaton.repository")
 public class MongoConfiguration
