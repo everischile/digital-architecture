@@ -1,19 +1,29 @@
 package com.everis.ideaton.service;
 
 import com.everis.ideaton.domain.Idea;
+import com.everis.ideaton.domain.dto.*;
 
-import java.math.BigInteger;
 import java.util.List;
 
 public interface IdeaService {
 
-    public List<Idea> getAllIdeas() throws RuntimeException;
+    List<Idea> getAllIdeas() throws RuntimeException;
 
-    public Idea getIdeaById(BigInteger id) throws RuntimeException;
+    Idea getIdeaById(String id) throws RuntimeException;
 
-    public Idea saveIdea(Idea idea) throws RuntimeException;
+    Idea saveIdea(IdeaDto idea) throws RuntimeException;
 
-    public boolean deleteIdea(BigInteger id) throws RuntimeException;
+    boolean deleteIdea(String id) throws RuntimeException;
 
-    public Idea updateIdea(Idea idea) throws RuntimeException;
+    Idea updateIdea(IdeaDto idea) throws RuntimeException;
+
+    Idea addImage(ImageDto imageDto, String ideaId) throws RuntimeException;
+
+    Idea addVideo(VideoDto videoDtoeo, String ideaId);
+
+    Idea giveALike(LikeDto likeDto, String ideaId);
+
+    Idea postCommentary(CommentaryDto commentaryDto, String ideaId);
+
+    int getTotalAmountLikes(String ideaId);
 }

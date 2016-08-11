@@ -1,36 +1,38 @@
 package com.everis.ideaton.domain;
 
+import lombok.Builder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigInteger;
-
 @Document
+@Builder
 final public class User {
 
     @Id
-    private final BigInteger  id;
+    private final String id;
     private final String firstName;
     private final String lastName;
     private final String email;
     private final String city;
     private final String country;
     private final String region;
-    private final String signedWith;
+    private final SocialPlatform signedWith;
+    private final Role role;
 
     public User() {
-        signedWith = null;
-        region = null;
-        country = null;
-        city = null;
-        email = null;
-        lastName = null;
-        firstName = null;
-        id = null;
+        this.role = null;
+        this.signedWith = null;
+        this.region = null;
+        this.country = null;
+        this.city = null;
+        this.email = null;
+        this.lastName = null;
+        this.firstName = null;
+        this.id = null;
     }
 
-    private User(BigInteger  id, String firstName, String lastName, String email, String city, String country,
-                 String region, String signedWith) {
+    private User(String id, String firstName, String lastName, String email, String city, String country,
+                 String region, SocialPlatform signedWith, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,14 +41,15 @@ final public class User {
         this.country = country;
         this.region = region;
         this.signedWith = signedWith;
+        this.role = role;
     }
 
-    public static User createBookInstance(BigInteger  id, String firstName, String lastName, String email, String city,
-                                          String country, String region, String signedWith){
-        return new  User(id, firstName, lastName, email, city, country, region, signedWith);
+    public static User createBookInstance(String  id, String firstName, String lastName, String email, String city,
+                                          String country, String region, SocialPlatform signedWith, Role role){
+        return new  User(id, firstName, lastName, email, city, country, region, signedWith, role);
     }
 
-    public BigInteger getId() {
+    public String getId() {
         return id;
     }
 
@@ -74,7 +77,12 @@ final public class User {
         return region;
     }
 
-    public String getSignedWith() {
+    public SocialPlatform getSignedWith() {
         return signedWith;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
 }

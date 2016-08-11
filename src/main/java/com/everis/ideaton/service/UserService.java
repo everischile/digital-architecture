@@ -1,19 +1,19 @@
 package com.everis.ideaton.service;
 
 import com.everis.ideaton.domain.User;
+import com.everis.ideaton.domain.dto.UserDto;
 
-import java.math.BigInteger;
 import java.util.List;
 
 public interface UserService {
 
-    public List<User> getAllUsers() throws RuntimeException;
+    List<User> getAllUsers() throws RuntimeException;
 
-    public User getUserById(BigInteger id) throws RuntimeException;
+    User getUserById(String id) throws RuntimeException;
 
-    public User saveUser(User user) throws RuntimeException;
+    User saveUser(UserDto userDto) throws RuntimeException;
 
-    public boolean deleteUser(BigInteger id) throws RuntimeException;
+    boolean deleteUser(String id) throws RuntimeException;
 
-    public User updateUser(User user) throws RuntimeException;
+    User updateUser(UserDto userDto) throws RuntimeException;
 }

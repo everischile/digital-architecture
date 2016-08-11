@@ -15,6 +15,6 @@ public enum Category {
     }
 
     public String getCategoryType() {
-        return categoryType;
+        return this.categoryType;
     }
 }

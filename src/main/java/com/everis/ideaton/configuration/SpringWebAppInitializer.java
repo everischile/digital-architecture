@@ -6,12 +6,13 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
-public class MyWebAppInitializer implements WebApplicationInitializer {
+public class SpringWebAppInitializer implements WebApplicationInitializer {
 
     @Override
-    public void onStartup(ServletContext container) {
+    public void onStartup(ServletContext container)throws ServletException {
         // Create the 'root' Spring application context
         AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
         rootContext.register(ApplicationConfiguration.class);

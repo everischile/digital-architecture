@@ -15,17 +15,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 
 import javax.xml.transform.Source;
 import java.util.List;
 
 @Configuration
 @EnableWebMvc
-@Import({SwaggerConfiguration.class, MongoConfiguration.class })
+@Import({SwaggerConfiguration.class, MongoConfiguration.class/*, SecurityConfig.class*/})
 /*@ComponentScan({ "com.everis.ideaton.controller", "com.everis.ideaton.repository",
 "com.everis.ideaton.service"})*/
 
@@ -83,5 +80,10 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
     }
 }
